@@ -60,6 +60,8 @@ var sampleSet = '';
 
 var answerArray = [];
 
+let currentAnswer;
+
 /// / FUNCTIONS ////
 
 // update UI with current sample
@@ -246,22 +248,19 @@ playBtnTwo.addEventListener('click', () => {
 
 answerA.addEventListener('click', () => {
     nextBtnVisibility.classList.remove('hide');
-    let currentAnswer = ('A' + currentSampleIndex);
-    answerArray.push(currentAnswer);
-
+    currentAnswer = ('A' + currentSampleIndex);
 });
 
 answerB.addEventListener('click', () => {
     nextBtnVisibility.classList.remove('hide');
-    let currentAnswer = ('B' + currentSampleIndex);
-    answerArray.push(currentAnswer);
-
+    currentAnswer = ('B' + currentSampleIndex);
 });
 
 nextBtn.addEventListener('click', () => {
     
     nextBtnVisibility.classList.add('hide');
     moveProgressBar();
+    answerArray.push(currentAnswer);
 
     if(questionIndex >= 4) {
         
