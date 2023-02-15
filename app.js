@@ -202,7 +202,7 @@ function sendInfoToDiscord() {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin' : 'https://reverbquizbackend.onrender.com/send-message'
+            'Access-Control-Allow-Origin' : 'https://reverbquizbackend.onrender.com'
         },
         body: JSON.stringify({ message })
     })
