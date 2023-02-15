@@ -2,6 +2,12 @@
 
 // Menu navigation
 
+const submitFormElement = document.getElementById("form-container");
+const startBtn = document.querySelector("#startBtn");
+const startBtnVisibility = document.getElementById('startButton');
+
+var imie;
+
 const nextBtn = document.querySelector('#nextBtn');
 const finishBtn = document.querySelector('#finishBtn');
 const testOne = document.querySelector('#testOne');
@@ -39,6 +45,9 @@ var chosenNumbers = [];
 // samples
 let sample;
 let sampleIndex = getRandomNumber();
+let currentSampleIndex;
+
+var testNumber;
 
 // progress bar declaration
 
@@ -49,13 +58,16 @@ let questionIndex = 0;
 
 var sampleSet = '';
 
+var answerArray = [];
+
 /// / FUNCTIONS ////
 
 // update UI with current sample
-function loadSong(sample) {
+function loadSample(sample) {
 
     audioOne.src = `${sample.audioA}`;
     audioTwo.src = `${sample.audioB}`;
+    currentSampleIndex = `${sample.title}`;
 
 }
 
@@ -123,7 +135,7 @@ async function retrieveSamplesFromServer(sampleSet) {
         })
         .then((data) => {
             sample = data.samples;
-            loadSong(sample[sampleIndex]);
+            loadSample(sample[sampleIndex]);
         })
         .catch((error) => {
             console.error('There has been a problem with your fetch operation:', error);
@@ -169,6 +181,7 @@ function hideMainMenu() {
 }
 
 function showMainMenu() {
+    submitFormElement.classList.add('hide');
     titleWelcome.classList.remove('hide');
     titleAnswer.classList.add('hide');
     testChoice.classList.remove('hide');
@@ -178,7 +191,50 @@ function showMainMenu() {
     titleAnswer.innerText = 'Wybierz Odpowiedź';
 }
 
+function sendInfoToDiscord() {
+    
+    // get the message from the user
+    const message = {imie, answerArray, testNumber};
+
+    console.log(JSON.stringify({message}));
+    // send the message to the backend using fetch
+    fetch('https://reverbquizbackend.onrender.com/send-message', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin' : 'https://reverbquizbackend.onrender.com/send-message'
+        },
+        body: JSON.stringify({ message })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // display a confirmation message to the user
+        alert(data.message);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+}
+
 /// / EVENT LISTENERS ////
+
+startBtn.addEventListener('click', () => {
+
+    imie = document.getElementById("imie").value;
+    var nameError = document.getElementById("nameError");
+    nameError.innerHTML = "";
+    var isValid = true;
+    if (imie == "") {
+        nameError.innerHTML = "Name is required";
+        isValid = false;
+        return false;
+    }
+    startBtnVisibility.classList.add('hide');
+    showMainMenu();
+    return true;
+
+});
 
 playBtnOne.addEventListener('click', () => {
     isAudioPlaying() ? pauseAudioOne() : playAudioOne();
@@ -190,10 +246,16 @@ playBtnTwo.addEventListener('click', () => {
 
 answerA.addEventListener('click', () => {
     nextBtnVisibility.classList.remove('hide');
+    let currentAnswer = ('A' + currentSampleIndex);
+    answerArray.push(currentAnswer);
+
 });
 
 answerB.addEventListener('click', () => {
     nextBtnVisibility.classList.remove('hide');
+    let currentAnswer = ('B' + currentSampleIndex);
+    answerArray.push(currentAnswer);
+
 });
 
 nextBtn.addEventListener('click', () => {
@@ -208,6 +270,7 @@ nextBtn.addEventListener('click', () => {
         musicPlayer.classList.add('hide');
         finishBtnVisibility.classList.remove('hide');
         titleAnswer.innerText = 'Dziękujemy za wykonanie testu!';
+        //console.log(answerArray);
 
     } else {
         questionIndex++;
@@ -225,6 +288,9 @@ finishBtn.addEventListener('click', () => {
 
     showMainMenu();
     resetProgressBar();
+    console.log(imie);
+    sendInfoToDiscord();
+    answerArray.length = 0;
 
 });
 
@@ -234,6 +300,7 @@ testOne.addEventListener('click', () => {
     chosenNumbers.length = 0;
     sampleIndex = getRandomNumber();
     sampleSet = 'audioOne.json';
+    testNumber = 'Test Pierwszy';
     retrieveSamplesFromServer(sampleSet);
     hideMainMenu();
 
@@ -244,6 +311,7 @@ testTwo.addEventListener('click', () => {
     chosenNumbers.length = 0;
     sampleIndex = getRandomNumber();
     sampleSet = 'audioTwo.json';
+    testNumber = 'Test Drugi';
     retrieveSamplesFromServer(sampleSet);
     hideMainMenu();
 
@@ -254,6 +322,7 @@ testThree.addEventListener('click', () => {
     chosenNumbers.length = 0;
     sampleIndex = getRandomNumber();
     sampleSet = 'audioThree.json';
+    testNumber = 'Test Trzeci';
     retrieveSamplesFromServer(sampleSet);
     hideMainMenu();
     
