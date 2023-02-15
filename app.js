@@ -198,7 +198,7 @@ function sendInfoToDiscord() {
     // get the message from the user
     const message = {imie, answerArray, testNumber};
 
-    console.log(JSON.stringify({message}));
+    //console.log(JSON.stringify({message}));
     // send the message to the backend using fetch
     fetch('https://reverbquizbackend.onrender.com/send-message', {
         method: 'POST',
@@ -226,10 +226,8 @@ startBtn.addEventListener('click', () => {
     imie = document.getElementById("imie").value;
     var nameError = document.getElementById("nameError");
     nameError.innerHTML = "";
-    var isValid = true;
     if (imie == "") {
         nameError.innerHTML = "Name is required";
-        isValid = false;
         return false;
     }
     startBtnVisibility.classList.add('hide');
@@ -261,6 +259,7 @@ nextBtn.addEventListener('click', () => {
     nextBtnVisibility.classList.add('hide');
     moveProgressBar();
     answerArray.push(currentAnswer);
+    //console.log(answerArray);
 
     if(questionIndex >= 4) {
         
@@ -276,10 +275,10 @@ nextBtn.addEventListener('click', () => {
     }
 
     sampleIndex = getRandomNumber();
-    console.log(chosenNumbers);
+    //console.log(chosenNumbers);
     retrieveSamplesFromServer(sampleSet);
 
-    console.log(questionIndex);
+    //console.log(questionIndex);
     
 });
 
@@ -287,7 +286,7 @@ finishBtn.addEventListener('click', () => {
 
     showMainMenu();
     resetProgressBar();
-    console.log(imie);
+    //console.log(imie);
     sendInfoToDiscord();
     answerArray.length = 0;
 
