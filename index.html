@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://unpkg.com/phosphor-icons"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+  <script defer src="./app.js"></script>
+  <title>Reverb Quiz</title>
+</head>
+
+<body>
+  <div class="music__container">
+
+    <h2 id="titleWelcome" class="music__title">Wybierz Test</h2>
+
+    <div id="testChoice" class="mainMenu">
+      <button id="testOne" class="button button-choice"><span>I</span></button>
+      <button id="testTwo" class="button button-choice"><span>II</span></button>
+      <button id="testThree" class="button button-choice"><span>III</span></button>
+    </div>
+
+    <h2 id="titleAnswer" class="music__title hide">Wybierz Odpowiedź</h2>
+    
+    <audio id="audioOne"></audio>
+    <audio id="audioTwo"></audio>
+
+    <div id="myProgress" class="hide">
+      <div id="myBar"></div>
+    </div>
+
+    <div id="sampleChoice" class="music__player hide">
+
+      <button id="playOne" class="action">
+        <i class="ph-play-circle"></i>
+      </button>
+      <button id="answerA" class="action action-answer">A</button>
+      
+      <button id="playTwo" class="action">
+        <i class="ph-play-circle"></i>
+      </button>
+      <button id="answerB" class="action action-answer">B</button>
+
+    </div>
+
+    <div id="nextButton" class="next__button hide">
+      <button id="nextBtn" class="button"><span>Next</span></button>
+    </div>
+    
+    <div id="finishButton" class="next__button hide">
+      <button id="finishBtn" class="button"><span>Finish</span></button>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

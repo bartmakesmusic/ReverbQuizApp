@@ -1,0 +1,34 @@
+{
+  "samples": [
+    {
+      "title": "One",
+      "audioA": "audioTwo/1A.wav",
+      "audioB": "audioTwo/1B.wav"
+    },
+    {
+      "title": "Two",
+      "audioA": "audioTwo/2A.wav",
+      "audioB": "audioTwo/2B.wav"
+    },
+    {
+      "title": "Three",
+      "audioA": "audioTwo/3A.wav",
+      "audioB": "audioTwo/3B.wav"
+    },
+    {
+      "title": "Four",
+      "audioA": "audioTwo/4A.wav",
+      "audioB": "audioTwo/4B.wav"
+    },
+    {
+      "title": "Five",
+      "audioA": "audioTwo/5A.wav",
+      "audioB": "audioTwo/5B.wav"
+    },
+    {
+      "title": "Six",
+      "audioA": "audioTwo/6A.wav",
+      "audioB": "audioTwo/6B.wav"
+    }
+  ]
+}
