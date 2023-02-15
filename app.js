@@ -94,6 +94,7 @@ function pauseAudioOne() {
     playBtnOne.querySelector('i').classList.add('ph-play-circle');
     playBtnOne.querySelector('i').classList.remove('ph-pause-circle');
     audioOne.pause();
+    audioOne.load();
 }
 
 // play audio of current sample
@@ -111,6 +112,7 @@ function pauseAudioTwo() {
     playBtnTwo.querySelector('i').classList.add('ph-play-circle');
     playBtnTwo.querySelector('i').classList.remove('ph-pause-circle');
     audioTwo.pause();
+    audioTwo.load();
 }
 
 // when sample has finished playing
@@ -118,12 +120,14 @@ audioOne.onended = function() {
     musicPlayer.classList.remove('playing');
     playBtnOne.querySelector('i').classList.add('ph-play-circle');
     playBtnOne.querySelector('i').classList.remove('ph-pause-circle');
+    audioOne.load();
 }; 
 
 audioTwo.onended = function() {
     musicPlayer.classList.remove('playing');
     playBtnTwo.querySelector('i').classList.add('ph-play-circle');
     playBtnTwo.querySelector('i').classList.remove('ph-pause-circle');
+    audioTwo.load();
 }; 
 
 // Load samples from "server"
